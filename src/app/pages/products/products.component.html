@@ -1,0 +1,26 @@
+<p-button label="Nouveau produit" icon="pi pi-plus" routerLink="/products/add"></p-button>
+<p-table [value]="products()">
+    <ng-template pTemplate="header">
+        <tr>
+            <th>Reference</th>
+            <th>Nom</th>
+            <th>Description</th>
+            <th>Stock</th>
+            <th>Prix</th>
+            <th></th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-product>
+        <tr>
+            <td>{{ product.reference }}</td>
+            <td>{{ product.name }}</td>
+            <td>{{ product.description }}</td>
+            <td>{{ product.stock }}</td>
+            <td>{{ product.price }}€</td>
+            <td>
+                <p-button outlined="true" severity="success" size="small" icon="pi pi-pen-to-square" routerLink="/products/edit/{{ product.id }}" />
+                <p-button outlined="true" severity="danger" size="small" icon="pi pi-trash" (onClick)="deleteProduct($event, product.id)" />
+            </td>
+        </tr>
+    </ng-template>
+</p-table>

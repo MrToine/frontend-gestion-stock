@@ -1,0 +1,72 @@
+<p-button icon="pi pi-arrow-left" severity="help" routerLink="/orders" rounded />
+Commande {{ order().reference }}
+<hr>
+<form [formGroup]="form" (ngSubmit)="onValidate()">
+    <div class="form-group">
+        <p-floatLabel>
+            <input type="text" pInputText formControlName="reference" [disabled]="true" />
+            <label>Reference</label>
+        </p-floatLabel>
+        <p-floatLabel>
+            <input type="text" pInputText formControlName="createdAt" [disabled]="true" />
+            <label>Date</label>
+        </p-floatLabel>
+        <p-floatLabel>
+            <input type="text" pInputText formControlName="refClient" [disabled]="true" />
+            <label>Client</label>
+        </p-floatLabel>
+        <p-floatLabel>
+            <input type="text" pInputText formControlName="state" [disabled]="true" />
+            <label>Etat</label>
+        </p-floatLabel>
+    </div>
+    <div class="form-group">
+        <p-floatLabel>
+            <p-dropdown 
+            [options]="products()" 
+            (onChange)="updateSelectedProduct($event)"
+            optionLabel="name" 
+            optionValue="reference"
+            [filter]="true"
+            filterBy="name"
+            placeholder="Selectionner Produit"
+            ></p-dropdown>
+            <label>Produit</label>
+        </p-floatLabel>
+        <p-floatLabel>
+            <input type="number" pInputText formControlName="selectedQuantity" (ngModelChange)="updateQuantity($event)" />
+            <label>Quantité</label>
+        </p-floatLabel>
+        <p-button label="Ajouter" severity="info" icon="pi pi-cart-arrow-down" (onClick)="addProduct()" [disabled]="order().state == 'Annulée' || order().state == 'Payée'"></p-button>
+    </div>
+    <p-table [value]="productsCart()">
+        <ng-template pTemplate="header">
+            <tr>
+                <th>Reference</th>
+                <th>quantité</th>
+                <th>Prix unitaire</th>
+                <th>Prix Total</th>
+                <th></th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-product>
+            <tr>
+                <td>{{ product.product.name }}</td>
+                <td>{{ product.quantity }}</td>
+                <td>{{ product.product.price }}</td>
+                <td>{{ product.product.price * product.quantity }}</td>
+                <td><p-button icon="pi pi-trash" severity="danger" size="small" outlined (onClick)="removeProduct(product.product.id)" [disabled]="order().state == 'Annulée' || order().state == 'Payée'"></p-button></td>
+            </tr>
+        </ng-template>
+    </p-table>
+    <br>
+    <p-floatLabel>
+        <input type="text" pInputText [disabled]="true" value="" />
+        <label>Total</label>
+    </p-floatLabel>
+    <div class="form-group">
+        <p-button type="submit" label="Terminer la commande" severity="info" [disabled]="order().state == 'Annulée' || order().state == 'Payée'"></p-button>
+        <p-button label="Valider le paiement" severity="success" (onClick)="orderPayed(order().reference)" [disabled]="order().state == 'Annulée' || order().state == 'Payée'"></p-button>
+        <p-button label="Annuler la commande" severity="danger" (onClick)="orderCancel(order().reference)" [disabled]="order().state == 'Annulée' || order().state == 'Payée'"></p-button>
+    </div>
+</form>

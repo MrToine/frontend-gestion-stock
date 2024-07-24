@@ -1,0 +1,79 @@
+<p-button icon="pi pi-arrow-left" severity="help" routerLink="/orders" rounded />
+<h2>Nouvelle commande</h2>
+<hr>
+<br>
+@if(isValidClient() == 0) {
+    <p-floatLabel>
+        <p-dropdown 
+        [options]="clients()" 
+        optionLabel="fullname" 
+        optionValue="reference"
+        [filter]="true"
+        filterBy="firstname"
+        placeholder="Selectionner Client"
+        (onChange)="loadForm($event)"
+        ></p-dropdown>
+        <label>Client</label>
+    </p-floatLabel>
+} @else {
+    <form [formGroup]="form" (ngSubmit)="onValidate()">
+        <div class="form-group">
+            <p-floatLabel>
+                <input type="text" pInputText formControlName="reference" [disabled]="true" />
+                <label>Reference</label>
+            </p-floatLabel>
+            <p-floatLabel>
+                <input type="text" pInputText formControlName="createdAt" [disabled]="true" />
+                <label>Date</label>
+            </p-floatLabel>
+            <p-floatLabel>
+                <input type="text" pInputText formControlName="refClient" [disabled]="true" />
+                <label>Client</label>
+            </p-floatLabel>
+            <p-floatLabel>
+                <input type="text" pInputText formControlName="state" [disabled]="true" />
+                <label>Etat</label>
+            </p-floatLabel>
+        </div>
+        <div class="form-group">
+            <p-floatLabel>
+                <p-dropdown 
+                [options]="products()" 
+                (onChange)="updateSelectedProduct($event)"
+                optionLabel="name" 
+                optionValue="reference"
+                [filter]="true"
+                filterBy="name"
+                placeholder="Selectionner Produit"
+                ></p-dropdown>
+                <label>Produit</label>
+            </p-floatLabel>
+            <p-floatLabel>
+                <input type="number" pInputText formControlName="selectedQuantity" (ngModelChange)="updateQuantity($event)" />
+                <label>Quantité</label>
+            </p-floatLabel>
+            <p-button label="Ajouter" severity="info" icon="pi pi-cart-arrow-down" (onClick)="addProduct()"></p-button>
+        </div>
+        <p-table [value]="productsCart()">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th>Reference</th>
+                    <th>quantité</th>
+                    <th>Prix unitaire</th>
+                    <th>Prix Total</th>
+                    <th></th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-product>
+                <tr>
+                    <td>{{ product.name }}</td>
+                    <td>{{ product.quantity }}</td>
+                    <td>{{ product.price }}</td>
+                    <td>{{ product.quantity * product.price }}</td>
+                    <td></td>
+                </tr>
+            </ng-template>
+        </p-table>
+        <p-button type="submit" label="Valider la commande" severity="success"></p-button>
+    </form>
+}

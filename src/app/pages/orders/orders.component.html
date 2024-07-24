@@ -1,0 +1,31 @@
+<p-button routerLink="/orders/add" size="small" label="Nouvelle commande" icon="pi pi-plus"></p-button>
+<p-table [value]="orders()">
+    <ng-template pTemplate="header">
+        <tr>
+            <th>Reference</th>
+            <th>Client</th>
+            <th>Date commande</th>
+            <th>Etat</th>
+            <th>Total</th>
+            <th></th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-order>
+        <tr>
+            <td>{{ order.reference }}</td>
+            <td>{{ order.client.reference }}</td>
+            <td>{{ order.createdAt }}</td>
+            <td>{{ order.state }}</td>
+            <td>{{ order.total }}</td>
+            <td>
+                <p-button size="small" severity="warning" icon="pi pi-pen-to-square" outlined routerLink="/orders/edit/{{ order.reference }}"></p-button>
+            </td>
+        </tr>
+    </ng-template>
+</p-table>
+<app-paginator
+    [(currentPage)]="page"
+    [size] = "10"
+    [total]="nbOrders"
+    (currentPageChange)="changePage()"
+></app-paginator>

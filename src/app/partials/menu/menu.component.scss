@@ -1,0 +1,40 @@
+:host {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    width: 200px;
+    background-color: #3781cb;
+    color: white;
+}
+
+ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+}
+
+li {
+    display: flex;
+    width: 100%;
+    height: 50px;
+    align-items: center;
+}
+
+a {
+    display: flex;
+    height: 100%;
+    width: 100%;
+    background-color: #3781cb;
+    align-items: center;
+    justify-content: center;
+    color: #94bee9;
+    text-decoration: none;
+    transition: all 0.8s;
+}
+
+a:hover {
+    background-color: #4e91d4;
+    color: #16528f;
+    font-size: 1.4rem;
+}

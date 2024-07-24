@@ -1,0 +1,28 @@
+<p-button icon="pi pi-arrow-left" severity="help" routerLink="/products" rounded />
+<h1>Editer un produit</h1>
+<hr>
+<form [formGroup]="form" (ngSubmit)="submit(productId)">
+    <div class="form-group">
+        <p-floatLabel>
+            <input pInputText formControlName="reference" type="text" [disabled]="true" />
+            <label>Référence Produit</label>
+        </p-floatLabel>
+        <p-floatLabel>
+            <input pInputText formControlName="name" type="text" />
+            <label>Nom Produit</label>
+        </p-floatLabel>
+        <p-floatLabel>
+            <input pInputText formControlName="price" type="number" />
+            <label>Prix</label>
+        </p-floatLabel>
+        <p-floatLabel>
+            <input pInputText formControlName="stock" type="text" [disabled]="true" />
+            <label>Stock</label>
+        </p-floatLabel>
+    </div>
+    <p-floatLabel>
+        <textarea formControlName="description" cols="95" pInputTextarea></textarea>
+        <label>Description</label>
+    </p-floatLabel>
+    <p-button type="submit" label="Editer" severity="success" />
+</form>

@@ -1,0 +1,26 @@
+<p-button icon="pi pi-arrow-left" severity="help" routerLink="/clients" rounded />
+<h1>Ajouter un client</h1>
+<hr>
+<form [formGroup]="form" (ngSubmit)="submit()">
+    <div class="form-group">
+        <p-floatLabel>
+            <input pInputText formControlName="lastname" type="text" />
+            <label>Nom</label>
+        </p-floatLabel>
+        <p-floatLabel>
+            <input pInputText formControlName="firstname" type="text" />
+            <label>Prénom</label>
+        </p-floatLabel>
+    </div>
+    <div class="form-group">
+        <p-floatLabel>
+            <input pInputText formControlName="email" type="email" />
+            <label>Email</label>
+        </p-floatLabel>
+        <p-floatLabel>
+            <input pInputText formControlName="tel" type="text" />
+            <label>Téléphone</label>
+        </p-floatLabel>
+    </div>
+    <p-button type="submit" label="Créer" severity="success" />
+</form>

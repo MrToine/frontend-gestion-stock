@@ -1,0 +1,14 @@
+<h1>Dashboard</h1>
+<h2>Nombre de commandes réalisés jusqu'a maintenant : {{ nbOrders }}</h2>
+<div class="graph-50">
+    <p-chart type="bar" [data]="productsGraph" ></p-chart>
+</div>
+<div class="graph-50">
+    <p-chart type="bar" [data]="productsPerOrdersGraph" ></p-chart>
+</div>
+<div class="graph-50">
+    <p-chart type="pie" [data]="ordersPerStateGraph" ></p-chart>
+</div>
+<div class="graph-50">
+    <p-chart type="line" [data]="nbOrdersPerDateGraph" [options]="lineOptions"></p-chart>
+</div>

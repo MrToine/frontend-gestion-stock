@@ -1,0 +1,24 @@
+<p-button label="Nouveau client" icon="pi pi-plus" routerLink="/clients/add"></p-button>
+<p-table [value]="clients()">
+    <ng-template pTemplate="header">
+        <tr>
+            <th>Reference</th>
+            <th>Nom</th>
+            <th>Prénom</th>
+            <th>email</th>
+            <th></th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-client>
+        <tr>
+            <td>{{ client.reference }}</td>
+            <td>{{ client.lastname }}</td>
+            <td>{{ client.firstname }}</td>
+            <td>{{ client.email }}</td>
+            <td>
+                <p-button outlined="true" severity="success" size="small" icon="pi pi-pen-to-square" routerLink="/clients/edit/{{ client.id }}" />
+                <p-button outlined="true" severity="danger" size="small" icon="pi pi-trash" (onClick)="deleteProduct($event, client.id)" />
+            </td>
+        </tr>
+    </ng-template>
+</p-table>

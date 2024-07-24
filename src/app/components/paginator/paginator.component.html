@@ -1,0 +1,11 @@
+@if (currentPage > 1) {
+    <p-button icon="pi pi-angle-double-left" (click)="changePage(1)"></p-button>
+}
+@for (item of getPages(); track $index) {
+    <p-button [disabled]="item === currentPage" 
+    (click)="changePage(item)"
+    size="small">
+    {{item}}
+</p-button>
+}
+<p-button icon="pi pi-angle-double-right" (click)="changePage(lastPage)"></p-button>
